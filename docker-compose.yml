@@ -1,0 +1,21 @@
+version: '1.29.2'
+services:
+  farkapi:
+    build: .
+    restart: always
+    ports:
+      - '5050:5050'
+    env_file: .env
+  postgres:
+    image: postgres:13.5
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+volumes:
+  postgres:

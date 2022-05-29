@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  discordId      Int              @id @unique
+  farkId         Int              @default(autoincrement())
+  discordName    String           @unique
+  serverNames    ServerUsername[] @relation(name: "ServerNames")
+  nationName     String           @unique
+  nationId       Int              @unique
+  nationVerified Boolean          @default(false)
+  nationApiKey   Boolean?         @unique
+  nationUsername String           @unique
+  createdAt      DateTime         @default(now())
+}
+
+model ServerUsername {
+  id             Int      @id @unique @default(autoincrement())
+  user           User     @relation(name: "ServerNames", fields: [discordId], references: [discordId])
+  discordId      Int
+  guildId        Int
+  serverName     String
+  serverUsername String
+  createdAt      DateTime @default(now())
+  roles          String[]
+}

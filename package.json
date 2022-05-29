@@ -1,0 +1,33 @@
+{
+  "name": "farkapi",
+  "version": "1.0.0",
+  "description": "Fark's API for P&W",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --transpile-only --no-notify --exit-child src/index.ts",
+    "dev:db": "docker compose up -d postgres",
+    "generate": "ts-node --transpile-only src/schema.ts",
+    "prettier:format": "prettier 'src/**/*.ts' --write",
+    "db:view": "prisma studio"
+  },
+  "keywords": [],
+  "author": "RhealLuhb (Patrick Martinez)",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^3.14.0",
+    "apollo-server": "^3.7.0",
+    "dotenv": "^16.0.1",
+    "graphql": "^16.5.0",
+    "jwks-rsa": "^2.1.3",
+    "nexus": "^1.3.0",
+    "ts-node": "^10.8.0"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.8",
+    "jsonwebtoken": "^8.5.1",
+    "prettier": "^2.6.2",
+    "prisma": "^3.14.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.4"
+  }
+}
