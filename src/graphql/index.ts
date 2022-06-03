@@ -1,3 +1,2 @@
-export * from './Auth'
-export * from './ServerName'
+export * from './ServerData'
 export * from './User'

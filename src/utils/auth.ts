@@ -24,7 +24,7 @@ const getKey = (
     cb(err, signingKey)
   }) as unknown as Secret
 
-export const decodeAuthHeader = (authHeader: string): {} => {
+export const decodeAuthHeader = (authHeader: string): any => {
   if (!authHeader) return new AuthenticationError('No authorization header')
 
   // Ensure value starts with "Bearer " and strip it
@@ -36,8 +36,7 @@ export const decodeAuthHeader = (authHeader: string): {} => {
   return new Promise((resolve, reject) => {
     jwt.verify(token, getKey, options, (err: Error, decoded: any) => {
       if (err) return reject(err)
-      console.log(decoded)
-      resolve(decoded?.toString)
+      resolve(decoded)
     })
   })
 }

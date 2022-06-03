@@ -11,25 +11,25 @@ datasource db {
 }
 
 model User {
-  discordId      Int              @id @unique
-  farkId         Int              @default(autoincrement())
-  discordName    String           @unique
-  serverNames    ServerUsername[] @relation(name: "ServerNames")
-  nationName     String           @unique
-  nationId       Int              @unique
-  nationVerified Boolean          @default(false)
-  nationApiKey   Boolean?         @unique
-  nationUsername String           @unique
-  createdAt      DateTime         @default(now())
+  discordId      String       @id @unique
+  farkId         Int          @default(autoincrement())
+  discordName    String       @unique
+  nationUsername String?      @unique
+  nationName     String?      @unique
+  nationId       Int?         @unique
+  nationVerified Boolean      @default(false)
+  nationApiKey   Boolean?     @unique
+  createdAt      DateTime     @default(now())
+  serverData     ServerData[] @relation(name: "ServerData")
 }
 
-model ServerUsername {
-  id             Int      @id @unique @default(autoincrement())
-  user           User     @relation(name: "ServerNames", fields: [discordId], references: [discordId])
-  discordId      Int
-  guildId        Int
-  serverName     String
-  serverUsername String
-  createdAt      DateTime @default(now())
-  roles          String[]
+model ServerData {
+  id         Int      @id @unique @default(autoincrement())
+  discordId  String
+  guildId    String
+  serverName String
+  username   String
+  createdAt  DateTime @default(now())
+  roles      String[]
+  user       User     @relation(name: "ServerData", fields: [discordId], references: [discordId])
 }
